@@ -1,0 +1,45 @@
+#--------------------------------------------------
+# Répertoire : /racine
+#--------------------------------------------------
+
+# Le serveur doit suivre les liens symboliques :
+Options +FollowSymlinks
+
+# Activation du module de réécriture d'URL :
+RewriteEngine on
+
+#--------------------------------------------------
+# Règles de réécriture d'URL :
+#--------------------------------------------------
+
+
+RewriteCond %{QUERY_STRING} ^id_carte=(.*)$
+RewriteCond %{QUERY_STRING} !^(.*&)?rewriting(&.*)?$
+RewriteRule ^fiche_detaillee\.php$ /fiche_detaillee-%1.html? [R=301,L]
+
+RewriteRule ^fiche_detaillee-([0-9]+)\.html$ /fiche_detaillee.php?id_carte=$1&rewriting [L]
+
+
+RewriteCond %{QUERY_STRING} ^id_ssmenu=(.*)$
+RewriteCond %{QUERY_STRING} !^(.*&)?rewriting(&.*)?$
+RewriteRule ^recherche\.php$ /recherche-ssmenu-%1.html? [R=301,L]
+
+RewriteRule ^recherche-ssmenu-([0-9]+)\.html$ /recherche.php?id_ssmenu=$1&rewriting [L]
+
+RewriteCond %{QUERY_STRING} ^tag=(.*)$
+RewriteCond %{QUERY_STRING} !^(.*&)?rewriting(&.*)?$
+RewriteRule ^recherche\.php$ /recherche-tag-%1.html? [R=301,L]
+
+RewriteRule ^recherche-tag-([0-9]+)\.html$ /recherche.php?tag=$1&rewriting [L]
+
+#--------------------------------------------------
+# webfonts :
+#--------------------------------------------------
+
+# AddType application/x-font-woff woff
+# AddType application/x-font-ttf ttf
+# AddType application/vnd.ms-fontobject eot
+# AddType image/svg+xml svg
+
+
+
